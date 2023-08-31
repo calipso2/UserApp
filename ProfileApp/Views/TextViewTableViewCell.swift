@@ -1,15 +1,9 @@
 import UIKit
 
-protocol EditTableViewCellDelegate: AnyObject {
-    func tableViewCell(_ cell: UITableViewCell, didChange value: Any?)
-}
-
-protocol FillableCellProtocol {
-    func fill(title: String?, value: Any?)
-}
-
 final class TextViewTableViewCell: UITableViewCell {
     weak var delegate: EditTableViewCellDelegate?
+    
+    private var isScrollEnabled: Bool = true
     
     private lazy var lblTitle: UILabel = {
         let lbl = UILabel()
@@ -35,24 +29,17 @@ final class TextViewTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupView(){
+    private func setupView() {
         selectionStyle = .none
         addSubview(lblTitle)
         contentView.addSubview(txtInput)
         txtInput.delegate = self
         
     }
-    
-    func fill(title: String?, value: String?, isScrollEnabled: Bool = true){
-        lblTitle.text = title
-        txtInput.text = value
-        txtInput.isScrollEnabled = isScrollEnabled
-    }
-    
 }
 
 //MARK: - setupConstraints
-extension TextViewTableViewCell{
+extension TextViewTableViewCell {
     private func setupConstraints(){
         NSLayoutConstraint.activate([
             lblTitle.centerYAnchor.constraint(equalTo: centerYAnchor),
@@ -68,9 +55,21 @@ extension TextViewTableViewCell{
 }
 
 //MARK: - UITextViewDelegate
-extension TextViewTableViewCell: UITextViewDelegate{
+extension TextViewTableViewCell: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
-        contentView.heightAnchor.constraint(equalTo: txtInput.heightAnchor, multiplier: 1).isActive = true
-        delegate?.tableViewCell(self, didChange: textView.text ?? "")
+        delegate?.editTableViewCell(self, didChange: textView.text ?? "")
+        
+        guard isScrollEnabled else { return }
+        delegate?.editTableViewCellShouldUpdateSize(self)
+    }
+}
+
+//MARK: - FillableCellProtocol
+extension TextViewTableViewCell: FillableCellProtocol {
+    func fill(title: String?, value: Any?, isScrollEnabled: Bool = true) {
+        lblTitle.text = title
+        txtInput.text = value as? String
+        txtInput.isScrollEnabled = isScrollEnabled
+        self.isScrollEnabled = !isScrollEnabled
     }
 }

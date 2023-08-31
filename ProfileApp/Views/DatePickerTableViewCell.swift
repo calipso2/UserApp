@@ -34,9 +34,9 @@ final class DatePickerTableViewCell: UITableViewCell {
         contentView.addSubview(pickDate)
         pickDate.addTarget(self, action: #selector(pickDate_valueChanged), for: .valueChanged)
     }
-
+    
     @objc private func pickDate_valueChanged(_ sender: UIDatePicker) {
-        delegate?.tableViewCell(self, didChange: sender.date)
+        delegate?.editTableViewCell(self, didChange: sender.date)
     }
 }
 
@@ -56,7 +56,7 @@ extension DatePickerTableViewCell{
 
 // MARK: - FillableCellProtocol
 extension DatePickerTableViewCell: FillableCellProtocol {
-    func fill(title: String?, value: Any?) {
+    func fill(title: String?, value: Any?, isScrollEnabled: Bool) {
         lblTitle.text = title
         pickDate.date = (value as? Date) ?? Date()
     }

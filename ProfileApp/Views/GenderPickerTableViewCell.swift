@@ -82,14 +82,14 @@ extension GenderPickerTableViewCell: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         txtGender.text = genders[row]
-        delegate?.tableViewCell(self, didChange: Gender.allCases[row])
+        delegate?.editTableViewCell(self, didChange: Gender.allCases[row])
         txtGender.resignFirstResponder()
     }
 }
 
 // MARK: - FillableCellProtocol
 extension GenderPickerTableViewCell: FillableCellProtocol {
-    func fill(title: String?, value: Any?) {
+    func fill(title: String?, value: Any?, isScrollEnabled: Bool) {
         lblTitle.text = title
         txtGender.text = (value as? Gender)?.title
     }
