@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 
 enum Gender: Int, CaseIterable, Codable {
     case none = 0
@@ -18,37 +19,48 @@ enum Gender: Int, CaseIterable, Codable {
 }
 
 struct Profile: Codable, Equatable {
-    var secondName: String = ""
-    var name: String = ""
-    var thirdName: String? = ""
+    var photo: String?
+    var lastName: String = ""
+    var firstName: String = ""
+    var middleName: String?
     var dateOfBirth: Date?
-    var genderType: Gender = .none
+    var gender: Gender = .none
     
+    enum Constants {
+        static let PhotoPath = "photo.jpg"
+        static let PhotoTmpPath = "photoTmp.jpg"
+    }
+}
+
+extension Profile {
     enum FieldType: Int, CaseIterable {
-        case secondName = 0
-        case name
-        case thirdName
+        case photo = 0
+        case lastName
+        case firstName
+        case middleName
         case dateOfBirth
-        case genderType
+        case gender
         
         var title: String {
             switch self{
-            case .secondName:
+            case .lastName:
                 return "Фамилия"
-            case .name:
+            case .firstName:
                 return "Имя"
-            case .thirdName:
+            case .middleName:
                 return "Отчество"
             case .dateOfBirth:
                 return "Дата рождения"
-            case .genderType:
+            case .gender:
                 return "Пол"
+            case .photo:
+                return "Аватар"
             }
         }
         
         init?(_ indexPath: IndexPath) {
-              self.init(rawValue: indexPath.row)
-          }
+            self.init(rawValue: indexPath.row)
+        }
     }
 }
 
@@ -56,17 +68,20 @@ struct Profile: Codable, Equatable {
 extension Profile{
     private static let profileKey = "profile"
     
-    func save() {
+    @discardableResult
+    func save() -> Result<Void, Error> {
         if let jsonData = try? JSONEncoder().encode(self) {
             UserDefaults.standard.set(jsonData, forKey: Profile.profileKey)
+            return .success(())
         } else {
-            print("Failed to encode profile.")
+            let encodingError = NSError(domain: "Profile Encoding Error", code: 0, userInfo: nil)
+            return .failure(encodingError)
         }
     }
     
     static func load() -> Profile? {
         guard let jsonData = UserDefaults.standard.data(forKey: profileKey) else {
-            return Profile()
+            return nil
         }
         do {
             return try JSONDecoder().decode(Profile.self, from: jsonData)
@@ -74,11 +89,12 @@ extension Profile{
             print("Failed to decode profile: \(error)")
             return nil
         }
-    }}
+    }
+}
 
 extension Profile {
     func validate() -> Bool {
-        return !secondName.isEmpty && !name.isEmpty && genderType != .none
+        return !lastName.isEmpty && !firstName.isEmpty && gender != .none
     }
 }
 
@@ -87,36 +103,56 @@ extension Profile {
     subscript<T>(field: FieldType) -> T? {
         get {
             switch field {
-            case .secondName:
-                return secondName as? T
-            case .name:
-                return name as? T
-            case .thirdName:
-                return thirdName as? T
+            case .photo:
+                return photo as? T
+            case .lastName:
+                return lastName as? T
+            case .firstName:
+                return firstName as? T
+            case .middleName:
+                return middleName as? T
             case .dateOfBirth:
                 return dateOfBirth as? T
-            case .genderType:
-                return genderType as? T
+            case .gender:
+                return gender as? T
             }
         }
         set {
             switch field {
-            case .secondName:
+            case .photo:
+                if let newValue = newValue as? String, !newValue.isEmpty {
+                    photo = newValue
+                } else {
+                    photo = nil
+                }
+                
+            case .lastName:
                 guard let newValue = newValue as? String else { return }
-                secondName = newValue
-            case .name:
+                lastName = newValue
+                
+            case .firstName:
                 guard let newValue = newValue as? String else { return }
-                name = newValue
-            case .thirdName:
-                guard let newValue = newValue as? String? else { return }
-                thirdName = newValue
+                firstName = newValue
+                
+            case .middleName:
+                if let newValue = newValue as? String, !newValue.isEmpty {
+                    middleName = newValue
+                } else {
+                    middleName = nil
+                    
+                }
             case .dateOfBirth:
-                guard let newValue = newValue as? Date? else { return }
-                dateOfBirth = newValue
-            case .genderType:
+                if let newValue = newValue as? Date, !newValue.description.isEmpty {
+                    dateOfBirth = newValue
+                } else {
+                    dateOfBirth = nil
+                }
+                
+            case .gender:
                 guard let newValue = newValue as? Gender else { return }
-                genderType = newValue
+                gender = newValue
             }
         }
+        
     }
 }
