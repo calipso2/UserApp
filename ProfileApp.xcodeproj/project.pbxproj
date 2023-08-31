@@ -16,6 +16,11 @@
 		507CB1102A0103330063018A /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507CB10F2A0103330063018A /* Profile.swift */; };
 		507CB1122A0107D00063018A /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507CB1112A0107D00063018A /* PreviewViewController.swift */; };
 		507CB1172A016FBB0063018A /* PreviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507CB1162A016FBB0063018A /* PreviewTableViewCell.swift */; };
+		5084C5A72AA06616006DB229 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5084C5A62AA06616006DB229 /* ImageTableViewCell.swift */; };
+		5084C5AB2AA06657006DB229 /* EditTableViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5084C5A82AA06657006DB229 /* EditTableViewCellDelegate.swift */; };
+		5084C5AC2AA06657006DB229 /* FillableCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5084C5A92AA06657006DB229 /* FillableCellProtocol.swift */; };
+		5084C5AF2AA066E3006DB229 /* IndexPath + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5084C5AE2AA066E3006DB229 /* IndexPath + Extension.swift */; };
+		5084C5B12AA066F4006DB229 /* FileManager + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5084C5B02AA066F4006DB229 /* FileManager + Extension.swift */; };
 		509004D62A1283BE00E969DC /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509004D52A1283BE00E969DC /* DatePickerTableViewCell.swift */; };
 		509004D82A1287C100E969DC /* GenderPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 509004D72A1287C100E969DC /* GenderPickerTableViewCell.swift */; };
 		50D749DF2A0E0F2700890789 /* TextViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D749DE2A0E0F2700890789 /* TextViewTableViewCell.swift */; };
@@ -34,6 +39,11 @@
 		507CB10F2A0103330063018A /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		507CB1112A0107D00063018A /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		507CB1162A016FBB0063018A /* PreviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewTableViewCell.swift; sourceTree = "<group>"; };
+		5084C5A62AA06616006DB229 /* ImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
+		5084C5A82AA06657006DB229 /* EditTableViewCellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTableViewCellDelegate.swift; sourceTree = "<group>"; };
+		5084C5A92AA06657006DB229 /* FillableCellProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillableCellProtocol.swift; sourceTree = "<group>"; };
+		5084C5AE2AA066E3006DB229 /* IndexPath + Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IndexPath + Extension.swift"; sourceTree = "<group>"; };
+		5084C5B02AA066F4006DB229 /* FileManager + Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager + Extension.swift"; sourceTree = "<group>"; };
 		509004D52A1283BE00E969DC /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerTableViewCell.swift; sourceTree = "<group>"; };
 		509004D72A1287C100E969DC /* GenderPickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderPickerTableViewCell.swift; sourceTree = "<group>"; };
 		50D749DE2A0E0F2700890789 /* TextViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewTableViewCell.swift; sourceTree = "<group>"; };
@@ -55,8 +65,10 @@
 			isa = PBXGroup;
 			children = (
 				504BBBC02A54BE00000BB26B /* DateFormatter + Extension.swift */,
-				504BBBC22A54BE23000BB26B /* UITableViewCell +  Extension.swift */,
+				5084C5B02AA066F4006DB229 /* FileManager + Extension.swift */,
+				5084C5AE2AA066E3006DB229 /* IndexPath + Extension.swift */,
 				50DE5FE02A5FF7CD00B8004D /* UITableView + Extension.swift */,
+				504BBBC22A54BE23000BB26B /* UITableViewCell +  Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -116,6 +128,9 @@
 				50D749DE2A0E0F2700890789 /* TextViewTableViewCell.swift */,
 				509004D52A1283BE00E969DC /* DatePickerTableViewCell.swift */,
 				509004D72A1287C100E969DC /* GenderPickerTableViewCell.swift */,
+				5084C5A62AA06616006DB229 /* ImageTableViewCell.swift */,
+				5084C5A92AA06657006DB229 /* FillableCellProtocol.swift */,
+				5084C5A82AA06657006DB229 /* EditTableViewCellDelegate.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -193,13 +208,18 @@
 				507CB1122A0107D00063018A /* PreviewViewController.swift in Sources */,
 				509004D62A1283BE00E969DC /* DatePickerTableViewCell.swift in Sources */,
 				500E767C2A02DC160029774D /* EditViewController.swift in Sources */,
+				5084C5AB2AA06657006DB229 /* EditTableViewCellDelegate.swift in Sources */,
 				504BBBC12A54BE00000BB26B /* DateFormatter + Extension.swift in Sources */,
 				50D749DF2A0E0F2700890789 /* TextViewTableViewCell.swift in Sources */,
 				504BBBC32A54BE23000BB26B /* UITableViewCell +  Extension.swift in Sources */,
 				50DE5FE12A5FF7CD00B8004D /* UITableView + Extension.swift in Sources */,
 				509004D82A1287C100E969DC /* GenderPickerTableViewCell.swift in Sources */,
 				507CB1172A016FBB0063018A /* PreviewTableViewCell.swift in Sources */,
+				5084C5A72AA06616006DB229 /* ImageTableViewCell.swift in Sources */,
+				5084C5B12AA066F4006DB229 /* FileManager + Extension.swift in Sources */,
 				507CB1102A0103330063018A /* Profile.swift in Sources */,
+				5084C5AC2AA06657006DB229 /* FillableCellProtocol.swift in Sources */,
+				5084C5AF2AA066E3006DB229 /* IndexPath + Extension.swift in Sources */,
 				507CB0F82A00FC760063018A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
