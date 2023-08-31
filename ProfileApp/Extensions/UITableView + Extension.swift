@@ -5,7 +5,7 @@ extension UITableView {
         return self.dequeueReusableCell(withIdentifier: T.reuseId, for: indexPath) as? T ?? T()
     }
     
-    func register<T: UITableViewCell>(_ cell: T.Type) {
-            register(cell, forCellReuseIdentifier: cell.reuseId)
+    func register(_ cellType: UITableViewCell.Type) {
+        register(cellType, forCellReuseIdentifier: cellType.reuseId)
     }
 }
