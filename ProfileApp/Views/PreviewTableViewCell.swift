@@ -24,15 +24,15 @@ final class PreviewTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func fill(value: String?, with title: String?) {
+        lblTitle.text = title
+        lblDescription.text = value
+    }
+    
     private func setupView() {
         selectionStyle = .none
         addSubview(lblTitle)
         addSubview(lblDescription)
-    }
-    
-    func fill(value: String?, with title: String?) {
-        lblTitle.text = title
-        lblDescription.text = value
     }
 }
 
